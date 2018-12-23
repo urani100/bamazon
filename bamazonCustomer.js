@@ -5,7 +5,7 @@ var inquirer = require("inquirer");
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "Tutu100!",
+    password: "*****",
     database: "bamazon"
   });
   
