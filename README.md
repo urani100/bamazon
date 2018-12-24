@@ -1,7 +1,7 @@
 # bamazon app
 
-#### Note: To run the **bamazon app** use the bamazon.sql file to create the bamazon datbase ans tables.
-#### Remaeber to replace the **passwrord** field in the databse connection section accordingly.
+#### Note: To run the **bamazon app** use the bamazon.sql file to create the bamazon database and tables.
+#### Remember to replace the database **passwrord** in each accordingly.
 
 ## Customer View 
 
@@ -20,8 +20,7 @@ The Node application **bamazonCustomer.js** first displays all of the items avai
 ID of the product they would like to buy
 How many units of the product they would like to buy
 
-Once the customer has placed the order, bamazonCustomer.js app checks the products table to ensure that the inventory meets the customer's request.
-The app lets the customer know the total cost of their purchase and the products table is updated to reflect the remaining quantity.
+Once the customer has placed the order, bamazonCustomer.js app checks the products table to ensure that the inventory meets the customer's request. The app lets the customer know the total cost of their purchase and the products table is updated to reflect the remaining quantity.
 
 <img src="assets/read-me-images/bamazonCustomer_1.png" width="650"/>
 

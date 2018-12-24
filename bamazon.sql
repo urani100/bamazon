@@ -1,6 +1,7 @@
 create database bamazon;
 
 use bamazon;
+
 SET SQL_SAFE_UPDATES = 0;
 
 create table products ( 
