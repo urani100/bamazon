@@ -1,7 +1,7 @@
 # bamazon app
 
-### Note: To run the **bamazon** use the bamazon.sql file to create the bamazon datbase ans tables.
-## Remamber to replace the **passworord** in the databse connection section
+#### Note: To run the **bamazon app** use the bamazon.sql file to create the bamazon datbase ans tables.
+#### Remaeber to replace the **passwrord** field in the databse connection section accordingly.
 
 ## Customer View 
 
