@@ -1,11 +1,14 @@
+//npm pacakes
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+
+//databse connection
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "*****",
+    password: "****", //use appropriate password
     database: "bamazon"
   });
   
@@ -15,7 +18,7 @@ var connection = mysql.createConnection({
       mangerOptions();
     });
 
-
+//mangerOptions function
   function mangerOptions(){
       inquirer
       .prompt({
@@ -42,18 +45,21 @@ var connection = mysql.createConnection({
       })
   }
 
- 
-  function showAllProducts(){
+
+//showAllProducts function
+function showAllProducts(){
     var query = "SELECT item_id , product_name,  department_name, price,  stock_quantity from products";
     displayItems(query);
 
 }
+
+//lowInventory function
 function lowInventory(){
     var query= 'select * from products where stock_quantity < 5';
     displayItems(query);
 }
 
-
+//updateInventory function
 function updateInventory(){
     inquirer
     .prompt([
@@ -77,7 +83,7 @@ function updateInventory(){
         }) 
 }
 
-
+//executeUpdate function
 function executeUpdate(quantity, Id){
 var query = "update products SET?  WHERE ?"
     connection.query(query, [{stock_quantity: quantity}, {item_id: Id}], function(err, res){
@@ -87,7 +93,7 @@ var query = "update products SET?  WHERE ?"
     })
 }
 
-
+//addProduct function
 function addProduct(){
     inquirer
     .prompt(
@@ -140,7 +146,7 @@ function addProduct(){
         var query = 'insert into products SET ?';
         connection.query(query, 
             [{
-                item_id: res.item_id , 
+                item_id: res.item_id, 
                 product_name: res.product_name,  
                 department_name: res.department_name, 
                 price:res.price,  
@@ -153,8 +159,8 @@ function addProduct(){
     })
 }
 
-
-  function displayItems(query) {
+//displayItems function
+function displayItems(query) {
     connection.query(query, function(err, res){
         if(err) throw err;
         //to do: use console.table instead

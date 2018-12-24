@@ -1,13 +1,14 @@
-
+//npm pacakes
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var cTable = require('console.table');
 
-
+//databse connection 
 var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "*****",
+    password: "****", //use appropriate password
     database: "bamazon"
   });
   
@@ -17,7 +18,7 @@ var connection = mysql.createConnection({
       supervisorOptions();
     });
 
-
+//supervisorOptions function
   function supervisorOptions(){
       inquirer
       .prompt({
@@ -33,18 +34,16 @@ var connection = mysql.createConnection({
         if(answer.options === 'View Product Sales by Department') {
             productSales();
         }else{
-            addDepartment();
+            addDept();
         }
       })
   }
 
 
-const cTable = require('console.table');
+//productSales function
   function productSales(){
-      var query ="select a.department_id as DEP_ID, a.department_name as DEP_Name, a.over_head_costs as Over_Head_cost, sum(b.product_sales) as Total_Product_Sale,  FORMAT(over_head_costs - sum(b.product_sales), 2) as Total_Profit from  departments a left join  products b on a.department_name = b.department_name group by  a.department_id order by a.department_id"
-
+      var query ="select a.department_id as DEP_ID, a.department_name as DEP_Name, a.over_head_costs as Over_Head_cost, FORMAT(sum(b.product_sales),2) as Total_Product_Sale,  FORMAT(over_head_costs - sum(b.product_sales), 2) as Total_Profit from  departments a left join  products b on a.department_name = b.department_name group by  a.department_id order by a.department_id"
       connection.query(query, function(err, res){
-        
           if(err) throw err;
           console.table(res);
           connection.end();
@@ -52,36 +51,30 @@ const cTable = require('console.table');
   }
 
 
-  function addDepartment(){
+//addDept function
+function addDept(){
     inquirer
     .prompt(
         [{
-            name: 'department_name',
+            name:'department_name',
             type:'input',
-            message: 'Enter Department Name'
+            message: 'Enter the department_name'
         },
         {
             name: 'over_head_costs',
             type:'input',
-            message: 'Enter Stock Over Head Costs',
-            validate: function(value) {
-                if (isNaN(value) === false) {
-                  return true;
-                }
-                return 'You must enter a number';
-              }
+            message: 'Enter the over_head_costs'
         }]
     ).then(function(res){
         var query = 'insert into departments SET ?';
         connection.query(query, 
-            [{  
+            [{
                 department_name: res.department_name, 
-                over_head_cost:res.over_head_cost
+                over_head_costs: res.over_head_costs
             }], function(err, resonse){
-                console.log('The item ' + res.department_id + ' has successfully been added to the departments table')
+                console.log('The Department ' + res.department_name + ' has successfully been added to the Department table')
             connection.end();
         })
         
     })
 }
-

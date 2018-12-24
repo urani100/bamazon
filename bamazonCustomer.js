@@ -1,11 +1,13 @@
+//npm pacakes
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
+//databse connection 
   var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "*****",
+    password: '*****', //use appropriate password
     database: "bamazon"
   });
   
@@ -16,7 +18,7 @@ var inquirer = require("inquirer");
     });
 
 
-
+//displayItems function
   function displayItems() {
     var query = "SELECT item_id , product_name,  department_name, price,  stock_quantity from products";
     connection.query(query, function(err, res){
@@ -36,15 +38,14 @@ var inquirer = require("inquirer");
     })     
 }
 
-
-//to do: trim input
+//purchase function 
 function purchase() {
     inquirer
       .prompt({
         name: "item_id",
         type: "input",
         message: "Enter the Item ID of the product you wish to purchase?",
-        // validate: validateAnswer 
+        
       })
       .then(function(answer){
             var query = "SELECT item_id , product_name,  department_name, price,  stock_quantity, product_sales from products WHERE ?";
@@ -59,20 +60,19 @@ function purchase() {
       });
   }
 
-
-function transaction(purchaseInfo) {
+//transaction function
+function transaction(info) {
     inquirer
       .prompt({
         name: "quantity",
         type: "input",
         message: "Please enter the number of item(s) you wish to purchase:"
-        // To do: validate: validateNum
-        //what if quantity is 0?
       })
       .then(function(answer) {
           if(parseInt(answer.quantity) <= info.stock_quantity ){
-            var total =  (answer.quantity * purchaseInfo.price).toFixed(2);
+            var total =  (answer.quantity * info.price).toFixed(2);
             var num = answer.quantity;
+           
             console.log("Your total is $" + total +
             "\nThank you for shopping with us.");
             updateItemCount(info, num);
@@ -85,7 +85,7 @@ function transaction(purchaseInfo) {
     });
 }
 
-
+//updateItemCount function
   function updateItemCount(info, num){
     var newStockQuantity = info.stock_quantity - num;
     var query = "update products SET? WHERE ?"
