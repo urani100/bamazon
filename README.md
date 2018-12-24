@@ -1,9 +1,9 @@
 # bamazon app
 
-###Note: To run the **bamazon** use the bamazon.sql file to create the bamazon datbase ans tables.
-##Remamber to replace the **passworord** in the databse connection section.
+### Note: To run the **bamazon** use the bamazon.sql file to create the bamazon datbase ans tables.
+## Remamber to replace the **passworord** in the databse connection section
 
-##Customer View 
+## Customer View 
 
 
 The **bamazon** MySQL Database contains the **products** table, which has the following columns:
@@ -30,11 +30,8 @@ If the the request exceeds the store  inventory, the app logs a message to alert
 <img src="assets/read-me-images/bamazonCustomer_1.png" width="650"/>
 
 
-bamazonCustomer.js app so that when a customer purchases anything from the store, the price of the product multiplied by the quantity purchased is added to the product's product_sales column.
 
-
-
-##Manager View 
+## Manager View 
 
 
 The Node application **bamazonManager.js.** promts the user with the followin options:
